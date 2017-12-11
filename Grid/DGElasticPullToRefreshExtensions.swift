@@ -149,10 +149,13 @@ public extension UIScrollView {
     }
     
     func dg_stopScrollingAnimation() {
-        if let superview = self.superview, let index = superview.subviews.index(where: { $0 == self }) as Int! {
-            removeFromSuperview()
-            superview.insertSubview(self, at: index)
+        DispatchQueue.main.async {
+            if let superview = self.superview, let index = superview.subviews.index(where: { $0 == self }) as Int! {
+                self.removeFromSuperview()
+                superview.insertSubview(self, at: index)
+            }
         }
+        
     }
     
 }
